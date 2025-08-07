@@ -1,0 +1,69 @@
+{
+  "metrics": [
+    {
+      "label": "Total Contacts",
+      "value": 247,
+      "trend": 12,
+      "trendDirection": "up",
+      "icon": "Users"
+    },
+    {
+      "label": "Active Deals",
+      "value": 34,
+      "trend": 8,
+      "trendDirection": "up",
+      "icon": "TrendingUp"
+    },
+    {
+      "label": "Tasks Due Today",
+      "value": 7,
+      "trend": -3,
+      "trendDirection": "down",
+      "icon": "CheckSquare"
+    },
+    {
+      "label": "This Month's Activities",
+      "value": 156,
+      "trend": 23,
+      "trendDirection": "up",
+      "icon": "Activity"
+    }
+  ],
+  "recentActivities": [
+    {
+      "Id": 1,
+      "description": "Called TechCorp Inc regarding Q4 proposal",
+      "contact": "Sarah Johnson",
+      "time": "2 hours ago",
+      "type": "call"
+    },
+    {
+      "Id": 2,
+      "description": "Sent follow-up email to Innovation Labs",
+      "contact": "Mike Chen",
+      "time": "4 hours ago",
+      "type": "email"
+    },
+    {
+      "Id": 3,
+      "description": "Meeting scheduled with Global Solutions",
+      "contact": "Alice Brown",
+      "time": "6 hours ago",
+      "type": "meeting"
+    },
+    {
+      "Id": 4,
+      "description": "Updated contact information for StartupXYZ",
+      "contact": "David Wilson",
+      "time": "8 hours ago",
+      "type": "update"
+    },
+    {
+      "Id": 5,
+      "description": "Created new deal opportunity",
+      "contact": "Jennifer Lee",
+      "time": "1 day ago",
+      "type": "deal"
+    }
+  ]
+}
