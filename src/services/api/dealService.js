@@ -107,9 +107,9 @@ export const dealService = {
 
       // Only include Updateable fields
       const mappedData = {
-        Name: dealData.Name || dealData.name,
+Name: dealData.Name || dealData.name,
         value_c: parseFloat(dealData.value_c || dealData.value || 0),
-        expected_close_date_c: dealData.expected_close_date_c || dealData.expectedCloseDate,
+        expected_close_date_c: this.formatDateForAPI(dealData.expected_close_date_c || dealData.expectedCloseDate),
         stage_c: dealData.stage_c || dealData.stage || "Lead",
         probability_percentage_c: parseInt(dealData.probability_percentage_c || dealData.probability || 0),
         company_c: parseInt(dealData.company_c || dealData.companyId),
@@ -169,10 +169,10 @@ export const dealService = {
       if (dealData.value_c !== undefined) mappedData.value_c = parseFloat(dealData.value_c);
       if (dealData.expected_close_date_c !== undefined) mappedData.expected_close_date_c = dealData.expected_close_date_c;
       if (dealData.stage_c !== undefined) mappedData.stage_c = dealData.stage_c;
-      if (dealData.probability_percentage_c !== undefined) mappedData.probability_percentage_c = parseInt(dealData.probability_percentage_c);
+if (dealData.probability_percentage_c !== undefined) mappedData.probability_percentage_c = parseInt(dealData.probability_percentage_c);
       if (dealData.company_c !== undefined) mappedData.company_c = parseInt(dealData.company_c);
       if (dealData.last_activity_date_c !== undefined) mappedData.last_activity_date_c = dealData.last_activity_date_c;
-
+      if (dealData.expected_close_date_c !== undefined) mappedData.expected_close_date_c = this.formatDateForAPI(dealData.expected_close_date_c);
       const params = {
         records: [mappedData]
       };
