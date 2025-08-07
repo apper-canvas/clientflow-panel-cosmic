@@ -65,7 +65,7 @@ const Tasks = () => {
     setLoading(false)
   }
 
-  const loadTasks = async () => {
+const loadTasks = async () => {
     setLoading(true)
     try {
       let tasksData = []
@@ -75,13 +75,13 @@ switch (activeTab) {
           tasksData = await taskService.getAll(filters)
           break
         case "due-today":
-          tasksData = await taskService.getDueToday()
+          tasksData = await taskService.getDueToday(filters)
           break
         case "upcoming":
-          tasksData = await taskService.getUpcoming()
+          tasksData = await taskService.getUpcoming(filters)
           break
         case "completed":
-          tasksData = await taskService.getCompleted()
+          tasksData = await taskService.getCompleted(filters)
           break
         default:
           tasksData = await taskService.getAll(filters)

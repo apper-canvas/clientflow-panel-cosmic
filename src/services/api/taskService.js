@@ -99,9 +99,56 @@ class TaskService {
     }
   }
 
-  async getDueToday() {
+async getDueToday(filters = {}) {
     try {
       const today = new Date().toISOString().split('T')[0];
+      const whereClause = [
+        {
+          FieldName: "status_c",
+          Operator: "EqualTo",
+          Values: ["Open"]
+        },
+        {
+          FieldName: "due_date_c",
+          Operator: "ExactMatch",
+          SubOperator: "Day",
+          Values: [new Date().toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })]
+        }
+      ];
+
+      // Add filters
+      if (filters.contact) {
+        whereClause.push({
+          FieldName: "contact_c",
+          Operator: "EqualTo",
+          Values: [parseInt(filters.contact)]
+        });
+      }
+
+      if (filters.deal) {
+        whereClause.push({
+          FieldName: "deal_c",
+          Operator: "EqualTo",
+          Values: [parseInt(filters.deal)]
+        });
+      }
+
+      if (filters.priority) {
+        whereClause.push({
+          FieldName: "priority_c",
+          Operator: "EqualTo",
+          Values: [filters.priority]
+        });
+      }
+
+      if (filters.type) {
+        whereClause.push({
+          FieldName: "type_c",
+          Operator: "EqualTo",
+          Values: [filters.type]
+        });
+      }
+
       const params = {
         fields: [
           { field: { Name: "Name" } },
@@ -114,19 +161,7 @@ class TaskService {
           { field: { Name: "status_c" } },
           { field: { Name: "notes_c" } }
         ],
-        where: [
-          {
-            FieldName: "status_c",
-            Operator: "EqualTo",
-            Values: ["Open"]
-          },
-          {
-            FieldName: "due_date_c",
-            Operator: "ExactMatch",
-            SubOperator: "Day",
-            Values: [new Date().toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' })]
-          }
-        ],
+        where: whereClause,
         orderBy: [
           {
             fieldName: "due_date_c",
@@ -149,8 +184,54 @@ class TaskService {
     }
   }
 
-  async getUpcoming() {
+async getUpcoming(filters = {}) {
     try {
+      const whereClause = [
+        {
+          FieldName: "status_c",
+          Operator: "EqualTo",
+          Values: ["Open"]
+        },
+        {
+          FieldName: "due_date_c",
+          Operator: "GreaterThan",
+          Values: [new Date().toISOString()]
+        }
+      ];
+
+      // Add filters
+      if (filters.contact) {
+        whereClause.push({
+          FieldName: "contact_c",
+          Operator: "EqualTo",
+          Values: [parseInt(filters.contact)]
+        });
+      }
+
+      if (filters.deal) {
+        whereClause.push({
+          FieldName: "deal_c",
+          Operator: "EqualTo",
+          Values: [parseInt(filters.deal)]
+        });
+      }
+
+      if (filters.priority) {
+        whereClause.push({
+          FieldName: "priority_c",
+          Operator: "EqualTo",
+          Values: [filters.priority]
+        });
+      }
+
+      if (filters.type) {
+        whereClause.push({
+          FieldName: "type_c",
+          Operator: "EqualTo",
+          Values: [filters.type]
+        });
+      }
+
       const params = {
         fields: [
           { field: { Name: "Name" } },
@@ -163,18 +244,7 @@ class TaskService {
           { field: { Name: "status_c" } },
           { field: { Name: "notes_c" } }
         ],
-        where: [
-          {
-            FieldName: "status_c",
-            Operator: "EqualTo",
-            Values: ["Open"]
-          },
-          {
-            FieldName: "due_date_c",
-            Operator: "GreaterThan",
-            Values: [new Date().toISOString()]
-          }
-        ],
+        where: whereClause,
         orderBy: [
           {
             fieldName: "due_date_c",
@@ -197,8 +267,49 @@ class TaskService {
     }
   }
 
-  async getCompleted() {
+async getCompleted(filters = {}) {
     try {
+      const whereClause = [
+        {
+          FieldName: "status_c",
+          Operator: "EqualTo",
+          Values: ["Completed"]
+        }
+      ];
+
+      // Add filters
+      if (filters.contact) {
+        whereClause.push({
+          FieldName: "contact_c",
+          Operator: "EqualTo",
+          Values: [parseInt(filters.contact)]
+        });
+      }
+
+      if (filters.deal) {
+        whereClause.push({
+          FieldName: "deal_c",
+          Operator: "EqualTo",
+          Values: [parseInt(filters.deal)]
+        });
+      }
+
+      if (filters.priority) {
+        whereClause.push({
+          FieldName: "priority_c",
+          Operator: "EqualTo",
+          Values: [filters.priority]
+        });
+      }
+
+      if (filters.type) {
+        whereClause.push({
+          FieldName: "type_c",
+          Operator: "EqualTo",
+          Values: [filters.type]
+        });
+      }
+
       const params = {
         fields: [
           { field: { Name: "Name" } },
@@ -211,13 +322,7 @@ class TaskService {
           { field: { Name: "status_c" } },
           { field: { Name: "notes_c" } }
         ],
-        where: [
-          {
-            FieldName: "status_c",
-            Operator: "EqualTo",
-            Values: ["Completed"]
-          }
-        ],
+        where: whereClause,
         orderBy: [
           {
             fieldName: "ModifiedOn",
