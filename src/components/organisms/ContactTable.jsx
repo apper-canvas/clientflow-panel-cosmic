@@ -101,7 +101,7 @@ const sortedContacts = [...contacts].sort((a, b) => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-100">
-{sortedContacts.map((contact, index) => (
+            {sortedContacts.map((contact, index) => (
               <DataTableRow
                 key={contact.Id}
                 contact={contact}

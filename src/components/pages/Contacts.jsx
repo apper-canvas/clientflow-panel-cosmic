@@ -113,18 +113,10 @@ const filterContacts = () => {
     setShowDetail(true)
   }
 
-const handleEditClick = (contact, mode = 'modal') => {
-    if (mode === 'inline') {
-      // Handle inline edit completion - update contact in state
-      setContacts(prev => 
-        prev.map(c => c.Id === contact.Id ? contact : c)
-      )
-    } else {
-      // Handle modal edit
-      setEditingContact(contact)
-      setShowForm(true)
-      setShowDetail(false)
-    }
+  const handleEditClick = (contact) => {
+    setEditingContact(contact)
+    setShowForm(true)
+    setShowDetail(false)
   }
 
   const handleFormCancel = () => {
