@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import { format, isPast, isToday, parseISO } from "date-fns";
 import { toast } from "react-toastify";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/Card";
-import taskService from "@/services/api/taskService";
 import { contactService } from "@/services/api/contactService";
 import { dealService } from "@/services/api/dealService";
+import taskService from "@/services/api/taskService";
 import ApperIcon from "@/components/ApperIcon";
 import Deals from "@/components/pages/Deals";
 import Contacts from "@/components/pages/Contacts";
@@ -140,7 +140,7 @@ switch (activeTab) {
     }
   }
 
-  const resetTaskForm = () => {
+const resetTaskForm = () => {
     setTaskForm({
       Name: "",
       description_c: "",
@@ -151,6 +151,15 @@ switch (activeTab) {
       type_c: "Follow-up Call",
       notes_c: ""
     })
+  }
+
+  const clearFilters = () => {
+    setFilters({
+      priority: "",
+      contact: "",
+      deal: "",
+      type: ""
+})
   }
 
   const openEditModal = (task) => {
@@ -306,7 +315,7 @@ const tabs = [
 
       {/* Filters */}
       <Card>
-        <CardContent className="p-4">
+<CardContent className="p-4">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
             <div>
               <Label htmlFor="priority-filter">Priority</Label>
@@ -361,6 +370,19 @@ const tabs = [
               </Select>
             </div>
           </div>
+          {(filters.priority || filters.contact || filters.deal || filters.type) && (
+            <div className="mt-4 flex justify-end">
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={clearFilters}
+                className="flex items-center space-x-2"
+              >
+                <ApperIcon name="RotateCcw" className="h-4 w-4" />
+                <span>Clear</span>
+              </Button>
+            </div>
+          )}
         </CardContent>
       </Card>
 
