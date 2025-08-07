@@ -30,8 +30,11 @@ const DataTableRow = ({ contact, onView, onEdit, onDelete, index }) => {
       <td className="px-6 py-4 whitespace-nowrap">
         <div className="text-gray-600">{contact.phone_c}</div>
       </td>
-      <td className="px-6 py-4 whitespace-nowrap">
+<td className="px-6 py-4 whitespace-nowrap">
         <div className="text-gray-600">{formatDate(contact.last_contact_date_c)}</div>
+      </td>
+      <td className="px-6 py-4 whitespace-nowrap">
+        <div className="text-gray-600">{contact.CreatedBy?.Name || 'Unknown'}</div>
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-right">
         <div className="flex items-center justify-end space-x-2">

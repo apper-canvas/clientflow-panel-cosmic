@@ -89,8 +89,11 @@ const sortedContacts = [...contacts].sort((a, b) => {
               <th className="px-6 py-4 text-left">
                 <SortButton field="phone">Phone</SortButton>
               </th>
-              <th className="px-6 py-4 text-left">
+<th className="px-6 py-4 text-left">
                 <SortButton field="lastContactDate">Last Contact</SortButton>
+              </th>
+              <th className="px-6 py-4 text-left">
+                <span className="font-semibold text-gray-700">Created By</span>
               </th>
               <th className="px-6 py-4 text-right">
                 <span className="font-semibold text-gray-700">Actions</span>
