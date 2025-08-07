@@ -10,8 +10,9 @@ export const contactService = {
       });
 
       const params = {
-        fields: [
+fields: [
           { field: { Name: "Name" } },
+          { field: { Name: "Tags" } },
           { field: { Name: "company_c" } },
           { field: { Name: "contact_person_c" } },
           { field: { Name: "email_c" } },
@@ -58,8 +59,9 @@ export const contactService = {
       });
 
       const params = {
-        fields: [
+fields: [
           { field: { Name: "Name" } },
+          { field: { Name: "Tags" } },
           { field: { Name: "company_c" } },
           { field: { Name: "contact_person_c" } },
           { field: { Name: "email_c" } },

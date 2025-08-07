@@ -18,20 +18,20 @@ const DataTableRow = ({ contact, onView, onEdit, onDelete, index }) => {
       transition={{ delay: index * 0.05 }}
       className="border-b border-gray-100 hover:bg-gradient-to-r hover:from-surface/50 hover:to-primary/5 transition-all duration-200"
     >
-      <td className="px-6 py-4 whitespace-nowrap">
-        <div className="font-medium text-gray-900">{contact.company}</div>
+<td className="px-6 py-4 whitespace-nowrap">
+        <div className="font-medium text-gray-900">{contact.company_c}</div>
       </td>
       <td className="px-6 py-4 whitespace-nowrap">
-        <div className="text-gray-900">{contact.contactPerson}</div>
+        <div className="text-gray-900">{contact.contact_person_c}</div>
       </td>
       <td className="px-6 py-4 whitespace-nowrap">
-        <div className="text-gray-600">{contact.email}</div>
+        <div className="text-gray-600">{contact.email_c}</div>
       </td>
       <td className="px-6 py-4 whitespace-nowrap">
-        <div className="text-gray-600">{contact.phone}</div>
+        <div className="text-gray-600">{contact.phone_c}</div>
       </td>
       <td className="px-6 py-4 whitespace-nowrap">
-        <div className="text-gray-600">{formatDate(contact.lastContactDate)}</div>
+        <div className="text-gray-600">{formatDate(contact.last_contact_date_c)}</div>
       </td>
       <td className="px-6 py-4 whitespace-nowrap text-right">
         <div className="flex items-center justify-end space-x-2">
