@@ -6,7 +6,7 @@ import Textarea from "@/components/atoms/Textarea"
 import ApperIcon from "@/components/ApperIcon"
 
 const ContactDetail = ({ contact, onClose, onEdit }) => {
-  const [notes, setNotes] = useState(contact.notes || "")
+const [notes, setNotes] = useState(contact.notes_c || "")
   const [isEditingNotes, setIsEditingNotes] = useState(false)
 
   const formatDate = (dateString) => {
@@ -23,11 +23,11 @@ const ContactDetail = ({ contact, onClose, onEdit }) => {
     setIsEditingNotes(false)
   }
 
-  const contactInfo = [
-    { label: "Email", value: contact.email, icon: "Mail" },
-    { label: "Phone", value: contact.phone, icon: "Phone" },
-    { label: "Industry", value: contact.industry, icon: "Building" },
-    { label: "Last Contact", value: formatDate(contact.lastContactDate), icon: "Calendar" },
+const contactInfo = [
+    { label: "Email", value: contact.email_c, icon: "Mail" },
+    { label: "Phone", value: contact.phone_c, icon: "Phone" },
+    { label: "Industry", value: contact.industry_c, icon: "Building" },
+    { label: "Last Contact", value: formatDate(contact.last_contact_date_c), icon: "Calendar" },
   ]
 
   return (
@@ -44,9 +44,9 @@ const ContactDetail = ({ contact, onClose, onEdit }) => {
       >
         {/* Header */}
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
-          <div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-1">{contact.company}</h2>
-            <p className="text-lg text-gray-600">{contact.contactPerson}</p>
+<div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-1">{contact.company_c}</h2>
+            <p className="text-lg text-gray-600">{contact.contact_person_c}</p>
           </div>
           <div className="flex items-center space-x-2">
             <Button

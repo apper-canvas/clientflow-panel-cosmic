@@ -81,10 +81,20 @@ const Header = ({ onMobileMenuToggle, onSearch }) => {
                   Settings
                 </a>
                 <hr className="my-2" />
-                <a href="#" className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-surface">
+<button 
+                  onClick={() => {
+                    const { ApperUI } = window.ApperSDK;
+                    ApperUI.logout().then(() => {
+                      window.location.href = '/login';
+                    }).catch(error => {
+                      console.error("Logout failed:", error);
+                    });
+                  }}
+                  className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-surface w-full text-left"
+                >
                   <ApperIcon name="LogOut" className="h-4 w-4 mr-3" />
                   Sign out
-                </a>
+                </button>
               </motion.div>
             )}
           </div>

@@ -1,18 +1,18 @@
-import { useState, useEffect } from "react"
-import { useOutletContext } from "react-router-dom"
-import { motion, AnimatePresence } from "framer-motion"
-import { toast } from "react-toastify"
-import SearchBar from "@/components/molecules/SearchBar"
-import Button from "@/components/atoms/Button"
-import { Card, CardHeader, CardTitle, CardContent } from "@/components/atoms/Card"
-import ContactTable from "@/components/organisms/ContactTable"
-import ContactForm from "@/components/organisms/ContactForm"
-import ContactDetail from "@/components/organisms/ContactDetail"
-import Loading from "@/components/ui/Loading"
-import Error from "@/components/ui/Error"
-import Empty from "@/components/ui/Empty"
-import ApperIcon from "@/components/ApperIcon"
-import { contactService } from "@/services/api/contactService"
+import React, { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
+import { AnimatePresence, motion } from "framer-motion";
+import { toast } from "react-toastify";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/Card";
+import { contactService } from "@/services/api/contactService";
+import ApperIcon from "@/components/ApperIcon";
+import SearchBar from "@/components/molecules/SearchBar";
+import ContactTable from "@/components/organisms/ContactTable";
+import ContactDetail from "@/components/organisms/ContactDetail";
+import ContactForm from "@/components/organisms/ContactForm";
+import Loading from "@/components/ui/Loading";
+import Error from "@/components/ui/Error";
+import Empty from "@/components/ui/Empty";
+import Button from "@/components/atoms/Button";
 
 const Contacts = () => {
   const { globalSearch } = useOutletContext()
@@ -49,16 +49,16 @@ const Contacts = () => {
     }
   }
 
-  const filterContacts = () => {
+const filterContacts = () => {
     let filtered = contacts
     const searchQuery = searchTerm || globalSearch || ""
 
     if (searchQuery) {
       filtered = contacts.filter(contact =>
-        contact.company.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        contact.contactPerson.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        contact.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        contact.phone.includes(searchQuery)
+        contact.company_c?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        contact.contact_person_c?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        contact.email_c?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        contact.phone_c?.includes(searchQuery)
       )
     }
 

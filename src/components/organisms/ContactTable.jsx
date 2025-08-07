@@ -17,9 +17,19 @@ const ContactTable = ({ contacts, onView, onEdit, onDelete }) => {
     }
   }
 
-  const sortedContacts = [...contacts].sort((a, b) => {
-    let aValue = a[sortField]
-    let bValue = b[sortField]
+const sortedContacts = [...contacts].sort((a, b) => {
+    // Map old field names to new database field names
+    const fieldMap = {
+      company: 'company_c',
+      contactPerson: 'contact_person_c', 
+      email: 'email_c',
+      phone: 'phone_c',
+      lastContactDate: 'last_contact_date_c'
+    };
+    
+    const dbField = fieldMap[sortField] || sortField;
+    let aValue = a[dbField]
+    let bValue = b[dbField]
 
     if (sortField === "lastContactDate") {
       aValue = new Date(aValue)

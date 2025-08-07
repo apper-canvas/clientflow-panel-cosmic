@@ -20,13 +20,13 @@ const industries = [
 ]
 
 const ContactForm = ({ contact, onSubmit, onCancel }) => {
-  const [formData, setFormData] = useState({
-    company: contact?.company || "",
-    contactPerson: contact?.contactPerson || "",
-    email: contact?.email || "",
-    phone: contact?.phone || "",
-    industry: contact?.industry || "",
-    notes: contact?.notes || "",
+const [formData, setFormData] = useState({
+    company: contact?.company_c || "",
+    contactPerson: contact?.contact_person_c || "",
+    email: contact?.email_c || "",
+    phone: contact?.phone_c || "",
+    industry: contact?.industry_c || "",
+    notes: contact?.notes_c || "",
   })
 
   const [errors, setErrors] = useState({})
