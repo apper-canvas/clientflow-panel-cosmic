@@ -76,13 +76,43 @@ const [newDeal, setNewDeal] = useState({
     }
   }
 
+// Helper function to format dates for API submission
+  const formatDateForSubmission = (dateValue, fieldType = 'Date') => {
+    if (!dateValue || dateValue === '') return dateValue
+    
+    try {
+      const date = new Date(dateValue)
+      if (isNaN(date.getTime())) return dateValue
+      
+      if (fieldType === 'DateTime') {
+        // Format as ISO 8601 for DateTime fields
+        return date.toISOString().slice(0, 19) // YYYY-MM-DDThh:mm:ss
+      } else {
+        // Format as YYYY-MM-DD for Date fields
+        return date.toISOString().slice(0, 10)
+      }
+    } catch (error) {
+      console.error('Date formatting error:', error)
+      return dateValue
+    }
+  }
+
   const handleCreateDeal = async (e) => {
     e.preventDefault()
     try {
-      await dealService.create(newDeal)
+      // Format dates according to field types from Tables & Fields JSON
+      const formattedDeal = {
+        ...newDeal,
+        expected_close_date_c: formatDateForSubmission(newDeal.expected_close_date_c, 'Date'),
+        last_activity_date_c: formatDateForSubmission(newDeal.last_activity_date_c, 'Date'),
+        completed_date_c: formatDateForSubmission(newDeal.completed_date_c, 'Date'),
+        rescheduled_from_c: formatDateForSubmission(newDeal.rescheduled_from_c, 'DateTime')
+      }
+      
+      await dealService.create(formattedDeal)
       toast.success('Deal created successfully')
       setShowCreateModal(false)
-setNewDeal({
+      setNewDeal({
         Name: '',
         company_c: '',
         value_c: '',
