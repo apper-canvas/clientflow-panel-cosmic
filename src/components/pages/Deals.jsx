@@ -36,13 +36,16 @@ const Deals = () => {
     { name: "Closed Lost", color: "bg-error", textColor: "text-red-700" }
   ]
 
-  const [newDeal, setNewDeal] = useState({
+const [newDeal, setNewDeal] = useState({
     Name: '',
     company_c: '',
     value_c: '',
     expected_close_date_c: '',
     stage_c: 'Lead',
-    probability_percentage_c: 0
+    probability_percentage_c: 0,
+    completed_date_c: '',
+    completed_by_c: '',
+    rescheduled_from_c: ''
   })
 
   useEffect(() => {
@@ -79,13 +82,16 @@ const Deals = () => {
       await dealService.create(newDeal)
       toast.success('Deal created successfully')
       setShowCreateModal(false)
-      setNewDeal({
+setNewDeal({
         Name: '',
         company_c: '',
         value_c: '',
         expected_close_date_c: '',
         stage_c: 'Lead',
-        probability_percentage_c: 0
+        probability_percentage_c: 0,
+        completed_date_c: '',
+        completed_by_c: '',
+        rescheduled_from_c: ''
       })
       loadDeals()
     } catch (err) {
@@ -382,7 +388,7 @@ const Deals = () => {
               </button>
             </div>
             
-            <form onSubmit={handleCreateDeal} className="space-y-4">
+<form onSubmit={handleCreateDeal} className="space-y-4">
               <FormField
                 label="Deal Name"
                 type="input"
@@ -450,6 +456,36 @@ const Deals = () => {
                 placeholder="0"
               />
               
+              <FormField
+                label="Completed Date"
+                type="input"
+                inputType="date"
+                value={newDeal.completed_date_c}
+                onChange={(e) => setNewDeal(prev => ({ ...prev, completed_date_c: e.target.value }))}
+              />
+              
+              <FormField
+                label="Completed By"
+                type="select"
+                value={newDeal.completed_by_c}
+                onChange={(e) => setNewDeal(prev => ({ ...prev, completed_by_c: e.target.value }))}
+              >
+                <option value="">Select who completed this</option>
+                {contacts.map(contact => (
+                  <option key={contact.Id} value={contact.Id}>
+                    {contact.Name}
+                  </option>
+                ))}
+              </FormField>
+              
+              <FormField
+                label="Rescheduled From"
+                type="input"
+                inputType="datetime-local"
+                value={newDeal.rescheduled_from_c}
+                onChange={(e) => setNewDeal(prev => ({ ...prev, rescheduled_from_c: e.target.value }))}
+              />
+              
               <div className="flex space-x-3 pt-4">
                 <Button type="submit" className="flex-1">
                   Create Deal
@@ -486,7 +522,7 @@ const Deals = () => {
               </button>
             </div>
             
-            <div className="space-y-4">
+<div className="space-y-4">
               <div>
                 <label className="text-sm font-medium text-gray-700">Deal Name</label>
                 <p className="mt-1 text-gray-900">{selectedDeal.Name}</p>
@@ -529,6 +565,31 @@ const Deals = () => {
                   <p className="mt-1 text-gray-900">{formatDate(selectedDeal.last_activity_date_c)}</p>
                 </div>
               </div>
+              
+              {(selectedDeal.completed_date_c || selectedDeal.completed_by_c || selectedDeal.rescheduled_from_c) && (
+                <div className="border-t pt-4 space-y-3">
+                  {selectedDeal.completed_date_c && (
+                    <div>
+                      <label className="text-sm font-medium text-gray-700">Completed Date</label>
+                      <p className="mt-1 text-gray-900">{formatDate(selectedDeal.completed_date_c)}</p>
+                    </div>
+                  )}
+                  
+                  {selectedDeal.completed_by_c && (
+                    <div>
+                      <label className="text-sm font-medium text-gray-700">Completed By</label>
+                      <p className="mt-1 text-gray-900">{selectedDeal.completed_by_c?.Name || 'Unknown'}</p>
+                    </div>
+                  )}
+                  
+                  {selectedDeal.rescheduled_from_c && (
+                    <div>
+                      <label className="text-sm font-medium text-gray-700">Rescheduled From</label>
+                      <p className="mt-1 text-gray-900">{formatDate(selectedDeal.rescheduled_from_c)}</p>
+                    </div>
+                  )}
+                </div>
+              )}
               
               {selectedDeal.CreatedOn && (
                 <div>

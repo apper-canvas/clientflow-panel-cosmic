@@ -10,7 +10,7 @@ export const dealService = {
       });
 
       const params = {
-        fields: [
+fields: [
           { field: { Name: "Name" } },
           { field: { Name: "value_c" } },
           { field: { Name: "expected_close_date_c" } },
@@ -18,6 +18,9 @@ export const dealService = {
           { field: { Name: "probability_percentage_c" } },
           { field: { Name: "company_c" } },
           { field: { Name: "last_activity_date_c" } },
+          { field: { Name: "completed_date_c" } },
+          { field: { Name: "completed_by_c" } },
+          { field: { Name: "rescheduled_from_c" } },
           { field: { Name: "Tags" } },
           { field: { Name: "Owner" } },
           { field: { Name: "CreatedOn" } },
@@ -61,7 +64,7 @@ export const dealService = {
       });
 
       const params = {
-        fields: [
+fields: [
           { field: { Name: "Name" } },
           { field: { Name: "value_c" } },
           { field: { Name: "expected_close_date_c" } },
@@ -69,6 +72,9 @@ export const dealService = {
           { field: { Name: "probability_percentage_c" } },
           { field: { Name: "company_c" } },
           { field: { Name: "last_activity_date_c" } },
+          { field: { Name: "completed_date_c" } },
+          { field: { Name: "completed_by_c" } },
+          { field: { Name: "rescheduled_from_c" } },
           { field: { Name: "Tags" } },
           { field: { Name: "Owner" } },
           { field: { Name: "CreatedOn" } },
@@ -113,7 +119,10 @@ Name: dealData.Name || dealData.name,
         stage_c: dealData.stage_c || dealData.stage || "Lead",
         probability_percentage_c: parseInt(dealData.probability_percentage_c || dealData.probability || 0),
         company_c: parseInt(dealData.company_c || dealData.companyId),
-        last_activity_date_c: new Date().toISOString().split('T')[0]
+        last_activity_date_c: new Date().toISOString().split('T')[0],
+        completed_date_c: dealData.completed_date_c ? this.formatDateForAPI(dealData.completed_date_c) : undefined,
+        completed_by_c: dealData.completed_by_c ? parseInt(dealData.completed_by_c) : undefined,
+        rescheduled_from_c: dealData.rescheduled_from_c || undefined
       };
 
       const params = {
@@ -160,19 +169,22 @@ Name: dealData.Name || dealData.name,
       });
 
       // Only include Updateable fields plus Id
-      const mappedData = {
+const mappedData = {
         Id: parseInt(id)
       };
 
       // Only add fields that are provided
       if (dealData.Name !== undefined) mappedData.Name = dealData.Name;
       if (dealData.value_c !== undefined) mappedData.value_c = parseFloat(dealData.value_c);
-      if (dealData.expected_close_date_c !== undefined) mappedData.expected_close_date_c = dealData.expected_close_date_c;
+      if (dealData.expected_close_date_c !== undefined) mappedData.expected_close_date_c = this.formatDateForAPI(dealData.expected_close_date_c);
       if (dealData.stage_c !== undefined) mappedData.stage_c = dealData.stage_c;
-if (dealData.probability_percentage_c !== undefined) mappedData.probability_percentage_c = parseInt(dealData.probability_percentage_c);
+      if (dealData.probability_percentage_c !== undefined) mappedData.probability_percentage_c = parseInt(dealData.probability_percentage_c);
       if (dealData.company_c !== undefined) mappedData.company_c = parseInt(dealData.company_c);
       if (dealData.last_activity_date_c !== undefined) mappedData.last_activity_date_c = dealData.last_activity_date_c;
-      if (dealData.expected_close_date_c !== undefined) mappedData.expected_close_date_c = this.formatDateForAPI(dealData.expected_close_date_c);
+      if (dealData.completed_date_c !== undefined) mappedData.completed_date_c = this.formatDateForAPI(dealData.completed_date_c);
+      if (dealData.completed_by_c !== undefined) mappedData.completed_by_c = parseInt(dealData.completed_by_c);
+      if (dealData.rescheduled_from_c !== undefined) mappedData.rescheduled_from_c = dealData.rescheduled_from_c;
+      
       const params = {
         records: [mappedData]
       };
