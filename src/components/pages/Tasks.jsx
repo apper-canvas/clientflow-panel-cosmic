@@ -70,7 +70,10 @@ const Tasks = () => {
     try {
       let tasksData = []
       
-      switch (activeTab) {
+switch (activeTab) {
+        case "all-tasks":
+          tasksData = await taskService.getAll(filters)
+          break
         case "due-today":
           tasksData = await taskService.getDueToday()
           break
@@ -210,7 +213,8 @@ const Tasks = () => {
     ]
   }
 
-  const tabs = [
+const tabs = [
+    { id: "all-tasks", label: "All Tasks", icon: "List" },
     { id: "due-today", label: "Due Today", icon: "Calendar" },
     { id: "upcoming", label: "Upcoming", icon: "Clock" },
     { id: "completed", label: "Completed", icon: "CheckCircle" }
@@ -373,7 +377,8 @@ const Tasks = () => {
             <div className="text-center py-16">
               <ApperIcon name="CheckSquare" className="h-12 w-12 text-gray-400 mx-auto mb-4" />
               <h3 className="text-lg font-medium text-gray-900 mb-2">No tasks found</h3>
-              <p className="text-gray-500 mb-4">
+<p className="text-gray-500 mb-4">
+                {activeTab === "all-tasks" && "No tasks found."}
                 {activeTab === "due-today" && "No tasks are due today."}
                 {activeTab === "upcoming" && "No upcoming tasks found."}
                 {activeTab === "completed" && "No completed tasks found."}
