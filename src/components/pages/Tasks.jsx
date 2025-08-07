@@ -17,7 +17,8 @@ import Select from "@/components/atoms/Select";
 import Label from "@/components/atoms/Label";
 
 const Tasks = () => {
-  const [tasks, setTasks] = useState([])
+const [tasks, setTasks] = useState([])
+  const [allTasks, setAllTasks] = useState([])
   const [contacts, setContacts] = useState([])
   const [deals, setDeals] = useState([])
   const [loading, setLoading] = useState(true)
@@ -42,15 +43,15 @@ const Tasks = () => {
     type: ""
   })
 
-  useEffect(() => {
+useEffect(() => {
     loadInitialData()
   }, [])
 
-  useEffect(() => {
+useEffect(() => {
     loadTasks()
   }, [activeTab, filters])
 
-  const loadInitialData = async () => {
+const loadInitialData = async () => {
     setLoading(true)
     try {
       const [contactsData, dealsData] = await Promise.all([
@@ -59,10 +60,23 @@ const Tasks = () => {
       ])
       setContacts(contactsData)
       setDeals(dealsData)
+      
+      // Load all tasks for statistics (without filters)
+      await loadAllTasksForStats()
     } catch (err) {
       setError("Failed to load initial data")
     }
     setLoading(false)
+  }
+
+  const loadAllTasksForStats = async () => {
+    try {
+      // Fetch all tasks without any filters for statistics
+      const allTasksData = await taskService.getAll({})
+      setAllTasks(allTasksData)
+    } catch (err) {
+      console.error("Failed to load tasks for statistics:", err)
+    }
   }
 
 const loadTasks = async () => {
@@ -105,7 +119,8 @@ switch (activeTab) {
     if (result) {
       setShowTaskModal(false)
       resetTaskForm()
-      loadTasks()
+loadTasks()
+      loadAllTasksForStats() // Update stats after creating task
     }
   }
 
@@ -120,7 +135,8 @@ switch (activeTab) {
       setShowTaskModal(false)
       setEditingTask(null)
       resetTaskForm()
-      loadTasks()
+loadTasks()
+      loadAllTasksForStats() // Update stats after updating task
     }
   }
 
@@ -128,7 +144,8 @@ switch (activeTab) {
     if (window.confirm("Are you sure you want to delete this task?")) {
       const result = await taskService.delete(taskId)
       if (result) {
-        loadTasks()
+loadTasks()
+        loadAllTasksForStats() // Update stats after deleting task
       }
     }
   }
@@ -136,7 +153,8 @@ switch (activeTab) {
   const handleCompleteTask = async (taskId) => {
     const result = await taskService.markComplete(taskId)
     if (result) {
-      loadTasks()
+loadTasks()
+      loadAllTasksForStats() // Update stats after completing task
     }
   }
 
@@ -212,8 +230,8 @@ const resetTaskForm = () => {
     }
   }
 
-  const getTaskStats = () => {
-    const allTasks = tasks
+const getTaskStats = () => {
+    // Use allTasks for statistics, not filtered tasks
     return [
       { label: "Total Tasks", value: allTasks.length, icon: "CheckSquare", color: "from-primary to-secondary" },
       { label: "Completed", value: allTasks.filter(t => t.status_c === "Completed").length, icon: "CheckCircle", color: "from-success to-emerald-600" },
