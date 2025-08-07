@@ -64,14 +64,6 @@ const MobileSidebar = ({ isOpen, onClose }) => {
                 ))}
               </nav>
 
-              {/* Bottom section */}
-              <div className="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-lg p-4">
-                <h3 className="font-medium text-gray-900 mb-1">Upgrade to Pro</h3>
-                <p className="text-sm text-gray-600 mb-3">Unlock advanced features and analytics</p>
-                <button className="w-full bg-gradient-to-r from-primary to-secondary text-white text-sm font-medium py-2 px-3 rounded-md hover:from-primary/90 hover:to-secondary/90 transition-all duration-200">
-                  Upgrade Now
-                </button>
-              </div>
             </div>
           </motion.aside>
         </>
