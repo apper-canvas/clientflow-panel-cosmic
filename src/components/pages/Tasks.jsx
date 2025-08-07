@@ -4,7 +4,7 @@ import { format, isPast, isToday, parseISO } from "date-fns";
 import { toast } from "react-toastify";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/atoms/Card";
 import taskService from "@/services/api/taskService";
-import contactService from "@/services/api/contactService";
+import { contactService } from "@/services/api/contactService";
 import dealService from "@/services/api/dealService";
 import ApperIcon from "@/components/ApperIcon";
 import Deals from "@/components/pages/Deals";
