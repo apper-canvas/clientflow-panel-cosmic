@@ -13,6 +13,7 @@ export const contactService = {
 fields: [
           { field: { Name: "Name" } },
           { field: { Name: "Tags" } },
+          { field: { Name: "CreatedBy" } },
           { field: { Name: "company_c" } },
           { field: { Name: "contact_person_c" } },
           { field: { Name: "email_c" } },
@@ -62,6 +63,7 @@ fields: [
 fields: [
           { field: { Name: "Name" } },
           { field: { Name: "Tags" } },
+          { field: { Name: "CreatedBy" } },
           { field: { Name: "company_c" } },
           { field: { Name: "contact_person_c" } },
           { field: { Name: "email_c" } },
