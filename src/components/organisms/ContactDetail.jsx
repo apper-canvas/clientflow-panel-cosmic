@@ -28,6 +28,9 @@ const contactInfo = [
     { label: "Phone", value: contact.phone_c, icon: "Phone" },
     { label: "Industry", value: contact.industry_c, icon: "Building" },
     { label: "Last Contact", value: formatDate(contact.last_contact_date_c), icon: "Calendar" },
+    { label: "LinkedIn Profile", value: contact.linkedin_profile_c, icon: "Linkedin", isLink: true },
+    { label: "Twitter Handle", value: contact.twitter_handle_c, icon: "Twitter" },
+    { label: "Facebook Profile", value: contact.facebook_profile_c, icon: "Facebook", isLink: true },
   ]
 
   return (
@@ -46,7 +49,7 @@ const contactInfo = [
         <div className="flex items-center justify-between p-6 border-b border-gray-200">
 <div>
             <h2 className="text-2xl font-bold text-gray-900 mb-1">{contact.company_c}</h2>
-            <p className="text-lg text-gray-600">{contact.contact_person_c}</p>
+            <p className="text-lg text-gray-600">{contact.first_name_c} {contact.last_name_c}</p>
           </div>
           <div className="flex items-center space-x-2">
             <Button
@@ -75,7 +78,7 @@ const contactInfo = [
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 {contactInfo.map((info, index) => (
                   <motion.div
                     key={info.label}
@@ -89,7 +92,18 @@ const contactInfo = [
                     </div>
                     <div>
                       <p className="text-sm font-medium text-gray-600">{info.label}</p>
-                      <p className="text-gray-900">{info.value}</p>
+                      {info.isLink && info.value ? (
+                        <a
+                          href={info.value}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary hover:text-primary-dark underline"
+                        >
+                          {info.value}
+                        </a>
+                      ) : (
+                        <p className="text-gray-900">{info.value || 'Not provided'}</p>
+                      )}
                     </div>
                   </motion.div>
                 ))}

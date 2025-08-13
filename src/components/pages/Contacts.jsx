@@ -57,8 +57,13 @@ const filterContacts = () => {
       filtered = contacts.filter(contact =>
         contact.company_c?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         contact.contact_person_c?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        contact.first_name_c?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        contact.last_name_c?.toLowerCase().includes(searchQuery.toLowerCase()) ||
         contact.email_c?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        contact.phone_c?.includes(searchQuery)
+        contact.phone_c?.includes(searchQuery) ||
+        contact.linkedin_profile_c?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        contact.twitter_handle_c?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        contact.facebook_profile_c?.toLowerCase().includes(searchQuery.toLowerCase())
       )
     }
 

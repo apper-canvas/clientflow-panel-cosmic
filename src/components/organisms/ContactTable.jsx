@@ -21,12 +21,17 @@ const sortedContacts = [...contacts].sort((a, b) => {
     // Map UI field names to database field names
     const fieldMap = {
       company: 'company_c',
-      contactPerson: 'contact_person_c', 
+      contactPerson: 'contact_person_c',
+      firstName: 'first_name_c',
+      lastName: 'last_name_c',
       email: 'email_c',
       phone: 'phone_c',
       lastContactDate: 'last_contact_date_c',
       industry: 'industry_c',
-      notes: 'notes_c'
+      notes: 'notes_c',
+      linkedinProfile: 'linkedin_profile_c',
+      twitterHandle: 'twitter_handle_c',
+      facebookProfile: 'facebook_profile_c'
     };
     
     const dbField = fieldMap[sortField] || sortField;
@@ -74,14 +79,17 @@ const sortedContacts = [...contacts].sort((a, b) => {
       className="bg-white rounded-xl shadow-card border border-gray-200 overflow-hidden"
     >
       <div className="overflow-x-auto">
-        <table className="min-w-full divide-y divide-gray-200">
+<table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-gradient-to-r from-surface to-gray-50">
             <tr>
               <th className="px-6 py-4 text-left">
                 <SortButton field="company">Company</SortButton>
               </th>
               <th className="px-6 py-4 text-left">
-                <SortButton field="contactPerson">Contact Person</SortButton>
+                <SortButton field="firstName">First Name</SortButton>
+              </th>
+              <th className="px-6 py-4 text-left">
+                <SortButton field="lastName">Last Name</SortButton>
               </th>
               <th className="px-6 py-4 text-left">
                 <SortButton field="email">Email</SortButton>
@@ -89,7 +97,16 @@ const sortedContacts = [...contacts].sort((a, b) => {
               <th className="px-6 py-4 text-left">
                 <SortButton field="phone">Phone</SortButton>
               </th>
-<th className="px-6 py-4 text-left">
+              <th className="px-6 py-4 text-left">
+                <SortButton field="linkedinProfile">LinkedIn</SortButton>
+              </th>
+              <th className="px-6 py-4 text-left">
+                <SortButton field="twitterHandle">Twitter</SortButton>
+              </th>
+              <th className="px-6 py-4 text-left">
+                <SortButton field="facebookProfile">Facebook</SortButton>
+              </th>
+              <th className="px-6 py-4 text-left">
                 <SortButton field="lastContactDate">Last Contact</SortButton>
               </th>
               <th className="px-6 py-4 text-left">
