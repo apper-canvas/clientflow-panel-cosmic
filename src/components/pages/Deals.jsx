@@ -402,11 +402,11 @@ const [newDeal, setNewDeal] = useState({
 
       {/* Create Deal Modal */}
       {showCreateModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+<div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
 <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-white rounded-lg p-6 w-full max-w-xs sm:max-w-sm lg:max-w-md mx-4"
+            className="bg-white rounded-lg p-6 w-full max-w-xs sm:max-w-sm lg:max-w-md mx-4 max-h-[90vh]"
           >
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold">Create New Deal</h3>
@@ -418,7 +418,7 @@ const [newDeal, setNewDeal] = useState({
               </button>
             </div>
             
-<form onSubmit={handleCreateDeal} className="space-y-4">
+<form onSubmit={handleCreateDeal} className="space-y-4 max-h-[60vh] overflow-y-auto">
               <FormField
                 label="Deal Name"
                 type="input"
