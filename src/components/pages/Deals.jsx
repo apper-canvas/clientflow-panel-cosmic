@@ -403,10 +403,10 @@ const [newDeal, setNewDeal] = useState({
       {/* Create Deal Modal */}
       {showCreateModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <motion.div
+<motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-white rounded-lg p-6 w-full max-w-md mx-4"
+            className="bg-white rounded-lg p-6 w-full max-w-xs sm:max-w-sm lg:max-w-md mx-4"
           >
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-lg font-semibold">Create New Deal</h3>
@@ -537,10 +537,10 @@ const [newDeal, setNewDeal] = useState({
       {/* Deal Detail Modal */}
       {showDetailModal && selectedDeal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <motion.div
+<motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="bg-white rounded-lg p-6 w-full max-w-lg mx-4"
+            className="bg-white rounded-lg p-6 w-full max-w-sm sm:max-w-md lg:max-w-lg mx-4"
           >
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-lg font-semibold">Deal Details</h3>
