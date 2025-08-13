@@ -45,7 +45,10 @@ const [newDeal, setNewDeal] = useState({
     probability_percentage_c: 0,
     completed_date_c: '',
     completed_by_c: '',
-    rescheduled_from_c: ''
+    rescheduled_from_c: '',
+    deal_description_c: '',
+    next_follow_up_date_c: '',
+    contact_c: ''
   })
 
   useEffect(() => {
@@ -101,18 +104,19 @@ const [newDeal, setNewDeal] = useState({
     e.preventDefault()
     try {
       // Format dates according to field types from Tables & Fields JSON
-      const formattedDeal = {
+const formattedDeal = {
         ...newDeal,
         expected_close_date_c: formatDateForSubmission(newDeal.expected_close_date_c, 'Date'),
         last_activity_date_c: formatDateForSubmission(newDeal.last_activity_date_c, 'Date'),
         completed_date_c: formatDateForSubmission(newDeal.completed_date_c, 'Date'),
-        rescheduled_from_c: formatDateForSubmission(newDeal.rescheduled_from_c, 'DateTime')
+        rescheduled_from_c: formatDateForSubmission(newDeal.rescheduled_from_c, 'DateTime'),
+        next_follow_up_date_c: formatDateForSubmission(newDeal.next_follow_up_date_c, 'DateTime')
       }
       
       await dealService.create(formattedDeal)
       toast.success('Deal created successfully')
       setShowCreateModal(false)
-      setNewDeal({
+setNewDeal({
         Name: '',
         company_c: '',
         value_c: '',
@@ -121,7 +125,10 @@ const [newDeal, setNewDeal] = useState({
         probability_percentage_c: 0,
         completed_date_c: '',
         completed_by_c: '',
-        rescheduled_from_c: ''
+        rescheduled_from_c: '',
+        deal_description_c: '',
+        next_follow_up_date_c: '',
+        contact_c: ''
       })
       loadDeals()
     } catch (err) {
@@ -454,12 +461,43 @@ const [newDeal, setNewDeal] = useState({
               />
               
               <FormField
-                label="Expected Close Date"
+label="Expected Close Date"
                 type="input"
                 inputType="date"
                 required
                 value={newDeal.expected_close_date_c}
                 onChange={(e) => setNewDeal(prev => ({ ...prev, expected_close_date_c: e.target.value }))}
+              />
+              
+              <FormField
+                label="Deal Description"
+                type="textarea"
+                value={newDeal.deal_description_c}
+                onChange={(e) => setNewDeal(prev => ({ ...prev, deal_description_c: e.target.value }))}
+                placeholder="Describe the deal details, requirements, and key information..."
+                rows={4}
+              />
+              
+              <FormField
+                label="Associated Contact"
+                type="select"
+                value={newDeal.contact_c}
+                onChange={(e) => setNewDeal(prev => ({ ...prev, contact_c: e.target.value }))}
+              >
+                <option value="">Select associated contact</option>
+                {contacts.map(contact => (
+                  <option key={contact.Id} value={contact.Id}>
+                    {contact.Name}
+                  </option>
+                ))}
+              </FormField>
+              
+              <FormField
+                label="Next Follow Up Date"
+                type="input"
+                inputType="datetime-local"
+                value={newDeal.next_follow_up_date_c}
+                onChange={(e) => setNewDeal(prev => ({ ...prev, next_follow_up_date_c: e.target.value }))}
               />
               
               <FormField
@@ -584,6 +622,13 @@ const [newDeal, setNewDeal] = useState({
                 </div>
               </div>
               
+{selectedDeal.deal_description_c && (
+                <div>
+                  <label className="text-sm font-medium text-gray-700">Deal Description</label>
+                  <p className="mt-1 text-gray-900 whitespace-pre-wrap">{selectedDeal.deal_description_c}</p>
+                </div>
+              )}
+              
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="text-sm font-medium text-gray-700">Expected Close Date</label>
@@ -594,6 +639,22 @@ const [newDeal, setNewDeal] = useState({
                   <label className="text-sm font-medium text-gray-700">Last Activity</label>
                   <p className="mt-1 text-gray-900">{formatDate(selectedDeal.last_activity_date_c)}</p>
                 </div>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                {selectedDeal.contact_c && (
+                  <div>
+                    <label className="text-sm font-medium text-gray-700">Associated Contact</label>
+                    <p className="mt-1 text-gray-900">{selectedDeal.contact_c?.Name || 'Unknown'}</p>
+                  </div>
+                )}
+                
+                {selectedDeal.next_follow_up_date_c && (
+                  <div>
+                    <label className="text-sm font-medium text-gray-700">Next Follow Up</label>
+                    <p className="mt-1 text-gray-900">{formatDate(selectedDeal.next_follow_up_date_c)}</p>
+                  </div>
+                )}
               </div>
               
               {(selectedDeal.completed_date_c || selectedDeal.completed_by_c || selectedDeal.rescheduled_from_c) && (

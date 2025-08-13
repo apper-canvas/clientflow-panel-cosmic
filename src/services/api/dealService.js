@@ -21,6 +21,9 @@ fields: [
           { field: { Name: "completed_date_c" } },
           { field: { Name: "completed_by_c" } },
           { field: { Name: "rescheduled_from_c" } },
+          { field: { Name: "deal_description_c" } },
+          { field: { Name: "next_follow_up_date_c" } },
+          { field: { Name: "contact_c" } },
           { field: { Name: "Tags" } },
           { field: { Name: "Owner" } },
           { field: { Name: "CreatedOn" } },
@@ -75,6 +78,9 @@ fields: [
           { field: { Name: "completed_date_c" } },
           { field: { Name: "completed_by_c" } },
           { field: { Name: "rescheduled_from_c" } },
+          { field: { Name: "deal_description_c" } },
+          { field: { Name: "next_follow_up_date_c" } },
+          { field: { Name: "contact_c" } },
           { field: { Name: "Tags" } },
           { field: { Name: "Owner" } },
           { field: { Name: "CreatedOn" } },
@@ -122,7 +128,10 @@ Name: dealData.Name || dealData.name,
         last_activity_date_c: new Date().toISOString().split('T')[0],
         completed_date_c: dealData.completed_date_c ? this.formatDateForAPI(dealData.completed_date_c) : undefined,
         completed_by_c: dealData.completed_by_c ? parseInt(dealData.completed_by_c) : undefined,
-        rescheduled_from_c: dealData.rescheduled_from_c || undefined
+        rescheduled_from_c: dealData.rescheduled_from_c || undefined,
+        deal_description_c: dealData.deal_description_c || undefined,
+        next_follow_up_date_c: dealData.next_follow_up_date_c || undefined,
+        contact_c: dealData.contact_c ? parseInt(dealData.contact_c) : undefined
       };
 
       const params = {
@@ -184,7 +193,9 @@ const mappedData = {
       if (dealData.completed_date_c !== undefined) mappedData.completed_date_c = this.formatDateForAPI(dealData.completed_date_c);
       if (dealData.completed_by_c !== undefined) mappedData.completed_by_c = parseInt(dealData.completed_by_c);
       if (dealData.rescheduled_from_c !== undefined) mappedData.rescheduled_from_c = dealData.rescheduled_from_c;
-      
+      if (dealData.deal_description_c !== undefined) mappedData.deal_description_c = dealData.deal_description_c;
+      if (dealData.next_follow_up_date_c !== undefined) mappedData.next_follow_up_date_c = dealData.next_follow_up_date_c;
+      if (dealData.contact_c !== undefined) mappedData.contact_c = parseInt(dealData.contact_c);
       const params = {
         records: [mappedData]
       };
